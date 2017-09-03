@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,14 +20,25 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GyroMaze
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : Page
-    {
-        public MainPage()
-        {
-            this.InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// An empty page that can be used on its own or navigated to within a Frame.
+	/// </summary>
+	public sealed partial class MainPage : Page
+	{
+		public MainPage()
+		{
+			this.InitializeComponent();
+
+		}
+
+		private async void ShowStatusBar()
+		{
+			var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+			await statusBar.ShowAsync();
+			statusBar.BackgroundOpacity = 1;
+			statusBar.BackgroundColor = (Color)this.Resources["SystemAccentColor"];
+			statusBar.ForegroundColor = Colors.White;
+		}
+
+	}
 }
